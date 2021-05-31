@@ -13,11 +13,7 @@ module.exports = {
   maxFeePerByte: 100,
   minFee: 0,
   dust: 54600,
-
   txVersion: 1,
-
-  explorer: new Insight(config.defaultApiUrls.litecoinTestnet),
-
   network: {
     messagePrefix: '\u0018Litecoin Signed Message:\n',
     bip32: {
@@ -29,5 +25,6 @@ module.exports = {
     scriptHash: 0xc4,
     wif: 0xef,
     dustThreshold: 100000
-  }
+  },
+  explorer: new Insight(config.defaultApiUrls.litecoinTestnet)
 }
