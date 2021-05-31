@@ -17,11 +17,7 @@ module.exports = {
   maxFeePerByte: 100,
   minFee: 0,
   dust: 54600,
-
   txVersion: 1,
-
-  explorer: new Insight(config.defaultApiUrls.litecoin),
-
   network: {
     bip32: {
       public: n.bip32.public,
@@ -32,5 +28,6 @@ module.exports = {
     pubKeyHash: n.pubKeyHash,
     scriptHash: n.scriptHash,
     wif: n.wif
-  }
+  },
+  explorer: new Insight(config.defaultApiUrls.litecoin)
 }
