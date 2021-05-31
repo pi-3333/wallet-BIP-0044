@@ -19,10 +19,7 @@ module.exports = {
   maxFeePerByte: 100,
   minFee: 0,
   dust: 546,
-
   txVersion: 1,
-
-  explorer: new Insight(config.defaultApiUrls.bitcoin),
-
-  network: n
+  network: n,
+  explorer: new Insight(config.defaultApiUrls.bitcoin)
 }
