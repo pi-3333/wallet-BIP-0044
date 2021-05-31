@@ -478,5 +478,128 @@ class Account {
     return this.account.getChain(chainNumber)
   }
 
+  async DiscoverChain (chainNumber, gapLimit) {
+    const chains = this.account.getChains()
+    const chain = chains[chainNumber].clone()
+
+    let discovered
+
+    try {
+      discovered = await discovery(chain, gapLimit, this.ChainPromise, chainNumber, this.coin)
+    } catch (e) {
+      throw new Error('Discovery error in DiscoverChain #' + chainNumber + ' \n' + e)
+    }
+
+    // throw away EACH unused address AFTER the last unused address
+    const unused = discovered.checked - discovered.used
+    for (let j = 1; j < unused; ++j) chain.pop()
+
+    // override the internal chain
+    this.account.chains[discovered.chainIndex] = chain
+
+    for (const address of discovered.addresses) { this.addresses[address.getPublicAddress()] = address }
+
+    return discovered
+  }
+
+  async ChainPromise (addresses, coin) {
+    const results = {}
+    const allAddresses = []
+
+    const addressPromises = []
+
+    for (const addr of addresses) {
+      const address = new Address(addr, coin, false)
+
+      const addressUpdatePromise = address.updateState()
+
+      // This will only be called for any rejections AFTER the first one,
+      // please take a look at the comment below for more info.
+      addressUpdatePromise.catch((e) => { console.warn(`An Address Discovery Promise failed during Account Discovery! ${e}\n${e.stack}`) })
+
+      addressPromises.push(addressUpdatePromise)
+    }
+
+    let promiseResponses = []
+
+    try {
+      promiseResponses = await Promise.all(addressPromises)
+    } catch (e) {
+      // This will still be called even though we use prom.catch() above.
+      // The first promise rejection will be caught here, all other promises
+      // that reject AFTER the first, will be caught in the above prom.catch() function.
+
+      throw new Error(`Account Discovery failure in ChainPromise! ${e}\n${e.stack}`)
+    }
+
+    for (const address of promiseResponses) {
+      results[address.getPublicAddress()] = address.getTotalReceived() > 0
+
+      // Store all addresses
+      allAddresses.push(address)
+    }
+
+    return { results: results, addresses: allAddresses }
+  }
+
+  /**
+   * Discover Used and Unused addresses for a specified Chain number
+   * @param  {number} chainNumber - The number of the chain you wish to discover
+   * @example <caption>Discover Chain 0</caption>
+   * import * as bip32 from 'bip32'
+   * import { Account, Networks } from '@oipwg/hdmw'
+   *
+   * let accountMaster = bip32.fromBase58("Fprv4xQSjQhWzrCVzvgkjam897LUV1AfxMuG8FBz5ouGAcbyiVcDYmqh7R2Fi22wjA56GQdmoU1AzfxsEmVnc5RfjGrWmAiqvfzmj4cCL3fJiiC", Networks.flo.network)
+   *
+   * let account = new Account(accountMaster, Networks.flo, false);
+   * account.discoverChain(0).then((acc) => {
+   *   console.log(acc.getChain(0).addresses)
+   * })
+   * @return {Promise<Account>} - A Promise that once finished will resolve to the Account (now with discovery done)
+   */
+  async discoverChain (chainNumber) {
+    try {
+      await this.DiscoverChain(chainNumber, GAP_LIMIT)
+    } catch (e) {
+      throw new Error('Unable to discoverChain #' + chainNumber + '! \n' + e)
+    }
+
+    this.chains[chainNumber] = { lastUpdate: Date.now() }
+
+    return this
+  }
+
+  /**
+   * Discover all Chains
+   * @example
+   * import * as bip32 from 'bip32'
+   * import { Account, Networks } from '@oipwg/hdmw'
+   *
+   * let accountMaster = bip32.fromBase58("Fprv4xQSjQhWzrCVzvgkjam897LUV1AfxMuG8FBz5ouGAcbyiVcDYmqh7R2Fi22wjA56GQdmoU1AzfxsEmVnc5RfjGrWmAiqvfzmj4cCL3fJiiC", Networks.flo.network)
+   *
+   * let account = new Account(accountMaster, Networks.flo, false);
+   * account.discoverChains().then((acc) => {
+   *   console.log(acc.getChain(0).addresses)
+   *   console.log(acc.getChain(1).addresses)
+   * })
+   * @return {Promise<Account>} - A Promise that once finished will resolve to the Account (now with discovery done)
+   */
+  async discoverChains () {
+    const chainsToDiscover = [0, 1]
+
+    let account
+
+    // Do each chain one at a time in case it crashes and errors out.
+    for (const c of chainsToDiscover) {
+      try {
+        account = await this.discoverChain(c)
+      } catch (e) {
+        throw new Error('Unable to discoverChains! \n' + e)
+      }
+    }
+
+    return account
+  }
+}
 
 module.exports = Account
