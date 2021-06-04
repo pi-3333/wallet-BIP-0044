@@ -1,24 +1,24 @@
 # BIP-0044 Deterministic Wallet Multi-Account Hierarchy
 
-# Wallet test for Coin 3333 and Multi coins
+# Wallet test for Coin VALUE and Multi coins
 
 Wallet Mnemonic: 'siren comic spy donkey ... asset lens proud bus exhaust section'
 
 Root Key:  xprv9s21ZrQH143K3HYAgqXMBtsXJbsSY1wcV...f9sNLEfMMKozkXmgtoy139YaTks7bMpmUUGcX
 
- # Coin 3333
+ # Coin VALUE
 
     Account:  0
        Account Extended Private Key:  xprv9xiGX2q91Zr2DSdtDHeTJHfaTPvi4JdFw...Jv9JWbUcPwbebxPXzEbu7PA3zXaCucrZSYXEK
        Account Extended Public Key:  xpub6BhcvYN2qwQKRviMKKBTfRcK1RmCTmM7J...EUfyVuSaK5fQzfUpvAcCxN4bAT9jyySbPGsTs
        BIP32 Extended Private Key:  xprvA13CjycRW3qpVzBjpJKHDXAR4LuQ1Dur1...KwDbaizeXr4e6RuNwQoqSNVRLgAmsqybd6yNm
        BIP32 Extended Public Key:  xpub6E2Z9V9KLRQ7iUGCvKrHaf79cNjtQgdhN...ieioFvxuozXgj6FRXprRPguJHNL2yb63mnr4C
-    m/44'/333333'/0'/0/0
+    m/44'/333332'/0'/0/0
        Address:  oNAydz5Tjkh...YQf49Jrzm4S
        Public Key:  02a7451395735369f2ecdf...5b2f04dbaab30a535dfdd6
        Private Key:  cV6NTLu255SZ5iCNk...BPqYgJU13NNKJhRs1
        Balance:  5.89326392
-    m/44'/333333'/0'/0/1
+    m/44'/333332'/0'/0/1
        Address:  ocB1T1ndFUs...rxUgaudG2Y8
        Public Key:  03589ae7c835ce76e23cf8...d70801802b0bcd70e99c1c
        Private Key:  cUATcNZMgKQn5vUYu...HFHfoi5mm4E1T7Gs3
@@ -29,12 +29,12 @@ Root Key:  xprv9s21ZrQH143K3HYAgqXMBtsXJbsSY1wcV...f9sNLEfMMKozkXmgtoy139YaTks7b
        Account Extended Public Key:  xpub6BhcvYN2qwQKV1Q2cPaATfyFumc8QSnxB...SA3seNHJoVFLjvJ9it4v2jmaxwKXi22V9Xt2K
        BIP32 Extended Private Key:  xprvA24KyfWZzQv3jdqAavMhUUvWzhkU37urb...BSrsDGvCXdR2tJbLbEjXMmmmNKhxreKwKt4P7
        BIP32 Extended Public Key:  xpub6F3gPB3TpnULx7udgwthqcsFYjaxSadhy...6d2EGm4ZM36e3hKyshSKGUDk8Dfbw91LskEax
-    m/44'/333333'/1'/0/0
+    m/44'/333332'/1'/0/0
        Address:  odqpABssS7t...c8RiG6awnCh
        Public Key:  0283a9e7d8261a2ab969f2...25ff0dffff2f8188d2fe47
        Private Key:  cVeB2FKMVxWwAN9bc...F3PYfeRpoSZeQyenc
        Balance:  8.12826208
-    m/44'/333333'/1'/0/1
+    m/44'/333332'/1'/0/1
        Address:  oPHTT8kciUG...L8DFBaNF1xL
        Public Key:  02bca1f7ae3f08bf1277e8...7a1ffaa20285796c185e9e
        Private Key:  cMuLzyoZ5bWUoGEhN...PVhfRsgSJb4p1bijW
@@ -45,7 +45,7 @@ Root Key:  xprv9s21ZrQH143K3HYAgqXMBtsXJbsSY1wcV...f9sNLEfMMKozkXmgtoy139YaTks7b
        Account Extended Public Key:  xpub6BhcvYN2qwQKYAXgeKKK9UGGG2sSUpu1g...dVeq35TiaiRqBwWhmtQzF2woMLZ7ScC5bVYSP
        BIP32 Extended Private Key:  xprvA28QeaXCmsBFc6cbr4UHWsKHpaFhxzcgi...PmRrjpGSsMJ7eW6Jy513rCJbXTUgnAcgSHg8V
        BIP32 Extended Public Key:  xpub6F7m4646cEjYpah4x61Ht1G2Nc6CNTLY6...su6wLv6tJz5u7pfqHCb8dxwTjHLDgnrLx3Kye
-    m/44'/333333'/2'/0/0
+    m/44'/333332'/2'/0/0
        Address:  oHffGWtMdFn...N7NxwgSS6ZL
        Public Key:  02fd32e0042afb858ebc63...1d79985f5916bf1588c1bf
        Private Key:  cNatkZLp1yixJaR5M...zu2mZkaKiTh7rifGj
@@ -56,7 +56,7 @@ Root Key:  xprv9s21ZrQH143K3HYAgqXMBtsXJbsSY1wcV...f9sNLEfMMKozkXmgtoy139YaTks7b
        Account Extended Public Key:  xpub6BhcvYN2qwQKZzw3XMBePRWwnMxxim1bH...ntKUbddM1HuLK3uKB57fDGBqhCn6n4tEvZeN6
        BIP32 Extended Private Key:  xprvA1dpqFEjcRqLtCBGZQ3eNTYbrM7rQmNwg...3jA7KHGyGQAgTjYs69jANR5xgDdDgqY7Xad1P
        BIP32 Extended Public Key:  xpub6EdBEkmdSoPe6gFjfRaejbVLQNxLpE6o3...3c7wm8QQBUQU6nZghD15XNJ4ovP9NfKDjLQTY
-    m/44'/333333'/3'/0/0
+    m/44'/333332'/3'/0/0
        Address:  oeXk1YuBBeG...LJTMWHhGZab
        Public Key:  0285a30dce4f368b3b8288...871221e964c88106d2b672
        Private Key:  cScXrejndMU92mfYD...zKBU5FsB26BCx3H3R
